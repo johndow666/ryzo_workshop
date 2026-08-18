@@ -111,13 +111,21 @@ h2 { font-size: clamp(2.9rem, 6.5vw, 6.8rem); line-height: .85; font-weight: 900
 .shot span { color: var(--muted); font-size: .72rem; font-weight: 800; text-transform: uppercase; }
 .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .shots-note { grid-column: 1 / -1; margin-top: 1.2rem; color: var(--muted); font-size: .85rem; font-weight: 700; }
-/* Первый экран главной: тот же язык, другая композиция */
-.hero.home .disc.one { width: min(42vw, 34rem); height: min(42vw, 34rem); right: auto; left: -10vw; top: auto; bottom: -8vh; }
-.hero.home .disc.two { width: min(24vw, 19rem); height: min(24vw, 19rem); right: 8vw; top: auto; bottom: 12vh; }
-.hero.home .bar { transform: rotate(14deg); }
-.hero.home .bar.one { width: 34vw; height: 1.6rem; right: -3rem; top: 18%; }
-.hero.home .bar.two { width: 22vw; height: .6rem; right: 12vw; top: 30%; }
-.hero.home .hero-copy { max-width: 60rem; }
+/* Первый экран главной: фотография вместо графики, гротеск вместо антиквы */
+.hero.home { padding-right: 56%; }
+.hero.home h1 {
+  font-family: inherit;
+  max-width: 13ch;
+  font-size: clamp(3.4rem, 8vw, 8rem);
+  line-height: .84;
+  letter-spacing: -.075em;
+  text-transform: uppercase;
+}
+.hero-photo {
+  position: absolute; inset: 0 0 0 auto; width: 52%;
+  border-left: 1px solid var(--ink);
+  background: #e6e0d6 url('/img/hero.jpg') center / cover no-repeat;
+}
 .section-cta { margin-top: 2.6rem; }
 .section-cta .button { background: var(--ink); color: var(--acid); }
 .section-cta .button:hover { background: #252525; }
@@ -209,9 +217,8 @@ footer { padding: 1rem var(--space); border-top: 1px solid var(--ink); display: 
   .disc.two { width: 11rem; height: 11rem; right: 30%; top: 8rem; }
   .bar.one { width: 35rem; right: -20rem; }
   .intro, .booking-head, .contact { grid-template-columns: 1fr; gap: 2rem; }
-  .hero.home .disc.one { width: 20rem; height: 20rem; left: -9rem; bottom: -5rem; }
-  .hero.home .disc.two { width: 10rem; height: 10rem; right: 1rem; bottom: 8vh; }
-  .hero.home .bar.one { width: 26rem; right: -13rem; }
+  .hero.home { padding-right: var(--space); padding-top: calc(34vh + 3.5rem); }
+  .hero-photo { width: 100%; height: 34vh; inset: 0 0 auto 0; border-left: 0; border-bottom: 1px solid var(--ink); }
   .shots { grid-template-columns: 1fr; }
   .program { grid-template-columns: 1fr; }
   .outcomes { grid-template-columns: 1fr; }
