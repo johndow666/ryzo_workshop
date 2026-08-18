@@ -112,11 +112,11 @@ h2 { font-size: clamp(2.9rem, 6.5vw, 6.8rem); line-height: .85; font-weight: 900
 .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .shots-note { grid-column: 1 / -1; margin-top: 1.2rem; color: var(--muted); font-size: .85rem; font-weight: 700; }
 /* Первый экран главной: фотография вместо графики, гротеск вместо антиквы */
-.hero.home { padding-right: 56%; }
+.hero.home { padding-right: 58%; }
 .hero.home h1 {
   font-family: inherit;
   max-width: 13ch;
-  font-size: clamp(3.4rem, 8vw, 8rem);
+  font-size: clamp(2.5rem, 4.6vw, 5.4rem);
   line-height: .84;
   letter-spacing: -.075em;
   text-transform: uppercase;
