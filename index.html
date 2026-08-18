@@ -3,360 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Мастер-класс по ксилографии в ISO Woodshop" />
-    <title>Мастер-класс по ксилографии | ISO Woodshop</title>
-    <style>
-      @font-face {
-        font-family: 'Playfair Display'; font-style: normal; font-weight: 900; font-display: swap;
-        src: url('fonts/playfair-900-cyrillic.woff2') format('woff2');
-        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-      }
-      @font-face {
-        font-family: 'Playfair Display'; font-style: normal; font-weight: 900; font-display: swap;
-        src: url('fonts/playfair-900-latin.woff2') format('woff2');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-      }
-      :root {
-        --ink: #101010;
-        --paper: #f6f6f2;
-        --acid: #bdff00;
-        --muted: #6c6c67;
-        --line: #bcbcb5;
-        --space: clamp(1.25rem, 3.2vw, 4rem);
-      }
-      * { box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
-      body {
-        margin: 0;
-        color: var(--ink);
-        background: var(--paper);
-        font-family: Arial, Helvetica, sans-serif;
-        letter-spacing: -0.025em;
-      }
-      button, input { font: inherit; }
-      button { cursor: pointer; }
-      .nav {
-        position: absolute;
-        inset: 0 0 auto;
-        z-index: 2;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.3rem var(--space);
-        font-size: .78rem;
-        font-weight: 700;
-        letter-spacing: .02em;
-        text-transform: uppercase;
-      }
-      .brand { font-size: 1rem; letter-spacing: -0.04em; text-transform: none; }
-      .hero {
-        min-height: 100dvh;
-        position: relative;
-        display: grid;
-        align-items: end;
-        padding: 7rem var(--space) 2rem;
-        overflow: hidden;
-        border-bottom: 1px solid var(--ink);
-      }
-      .hero-copy { position: relative; z-index: 1; max-width: 72rem; }
-      h1, h2, p { margin: 0; }
-      h1 {
-        max-width: 15ch;
-        font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-        font-size: clamp(3.3rem, 8.6vw, 8.8rem);
-        line-height: .94;
-        font-weight: 900;
-        letter-spacing: -0.02em;
-      }
-      .hero-meta {
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 2rem;
-        margin-top: clamp(2rem, 5vw, 5rem);
-      }
-      .hero-meta p { max-width: 23ch; font-size: 1.05rem; line-height: 1.15; font-weight: 700; }
-      .button {
-        display: inline-flex;
-        align-items: center;
-        border: 1px solid var(--ink);
-        padding: .95rem 1.25rem;
-        min-height: 3.25rem;
-        text-decoration: none;
-        color: var(--ink);
-        background: var(--acid);
-        font-weight: 800;
-        font-size: .9rem;
-        letter-spacing: -.02em;
-        text-transform: uppercase;
-        transition: transform .16s ease, background .16s ease;
-      }
-      .button:hover { background: #d2ff42; transform: translateY(-2px); }
-      .button:active { transform: translateY(1px); }
-      .print-marks { position: absolute; inset: 0; pointer-events: none; }
-      .disc { position: absolute; border: 1px solid var(--ink); border-radius: 50%; mix-blend-mode: multiply; }
-      .disc.one { width: min(53vw, 44rem); height: min(53vw, 44rem); right: -12vw; top: 10vh; background: repeating-radial-gradient(circle at 50% 50%, transparent 0 11px, #101010 12px 13px); }
-      .disc.two { width: min(31vw, 25rem); height: min(31vw, 25rem); right: 23vw; top: 4vh; background: var(--acid); }
-      .bar { position: absolute; background: var(--ink); transform: rotate(-28deg); }
-      .bar.one { width: 48vw; height: 2.4rem; right: -4rem; top: 56%; }
-      .bar.two { width: 37vw; height: .8rem; right: 3rem; top: 68%; }
-      section { padding: clamp(5rem, 11vw, 10rem) var(--space); }
-      .section-label { margin-bottom: 2rem; font-size: .73rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
-      .intro { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(15rem, .75fr); gap: 6vw; border-bottom: 1px solid var(--ink); }
-      h2 { font-size: clamp(2.9rem, 6.5vw, 6.8rem); line-height: .85; font-weight: 900; letter-spacing: -.075em; text-transform: uppercase; }
-      .intro-copy { align-self: end; font-size: clamp(1.1rem, 1.55vw, 1.45rem); font-weight: 700; line-height: 1.12; }
-      .program {
-        grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, 1fr); gap: .7rem 2.5rem;
-        margin: 2.4rem 0 0; padding-top: 1.4rem; border-top: 1px solid var(--ink);
-        list-style: none; font-size: .95rem; font-weight: 700; line-height: 1.25;
-      }
-      .program li { position: relative; padding-left: 1.5rem; }
-      .program li::before { content: ''; position: absolute; left: 0; top: .3em; width: .65rem; height: .65rem; border: 1px solid var(--ink); background: var(--acid); }
-      .outcomes { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 2rem; border-top: 1px solid var(--ink); }
-      .outcome { padding: 1.1rem 1rem 0 0; min-height: 8rem; border-right: 1px solid var(--ink); }
-      .outcome + .outcome { padding-left: 1rem; }
-      .outcome:last-child { border-right: 0; }
-      .outcome strong { display: block; margin-bottom: .35rem; font-size: 2.8rem; line-height: .85; letter-spacing: -.08em; }
-      .outcome span { display: block; max-width: 14ch; font-size: .87rem; line-height: 1.1; font-weight: 700; }
-      .gallery { background: var(--ink); color: var(--paper); }
-      .gallery-grid { display: grid; grid-template-columns: 1.15fr .75fr 1.1fr; grid-template-rows: 14rem 13rem; gap: .85rem; }
-      .print {
-        position: relative;
-        overflow: hidden;
-        background: #deded7;
-        color: var(--ink);
-      }
-      .print::before, .print::after { content: ""; position: absolute; }
-      .print.a { grid-row: 1 / 3; background: var(--acid); }
-      .print.a::before { width: 150%; height: 11rem; left: -21%; top: 23%; border: .75rem solid var(--ink); transform: rotate(-35deg); }
-      .print.a::after { width: 8rem; height: 8rem; border-radius: 50%; background: var(--paper); left: 20%; top: 12%; }
-      .print.b { background: #f2f2eb; }
-      .print.b::before { inset: 1rem; background: repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 10px); clip-path: polygon(5% 25%, 100% 0, 80% 100%, 0 85%); }
-      .print.c { background: #bdbdb8; }
-      .print.c::before { width: 15rem; height: 15rem; top: -3rem; left: 15%; background: var(--ink); clip-path: polygon(50% 0, 100% 38%, 82% 100%, 20% 85%, 0 25%); }
-      .print.c::after { width: 16rem; height: 1.2rem; top: 50%; left: -1rem; background: var(--acid); transform: rotate(28deg); }
-      .print.d { background: #f2f2eb; }
-      .print.d::before { width: 140%; height: 140%; top: -20%; left: -20%; background: repeating-radial-gradient(circle at center, transparent 0 9px, var(--ink) 10px 11px); }
-      .print span { position: absolute; left: .7rem; bottom: .65rem; z-index: 1; padding: .25rem .35rem; background: var(--paper); font-size: .68rem; font-weight: 800; text-transform: uppercase; }
-      .gallery-note { margin-top: 1.2rem; color: #cfcfc6; font-size: .85rem; }
-      .material { border-bottom: 1px solid var(--ink); }
-      .process { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); margin-top: 4rem; }
-      .process-step { min-height: 15rem; padding: 1.1rem; border-right: 1px solid var(--ink); display: flex; flex-direction: column; justify-content: space-between; }
-      .process-step:first-child { padding-left: 0; }
-      .process-step:last-child { border-right: 0; }
-      .step-name { font-size: clamp(1.3rem, 2.2vw, 2.2rem); font-weight: 900; line-height: .92; letter-spacing: -.06em; text-transform: uppercase; }
-      .step-mark { width: 3rem; height: 3rem; border: 1px solid var(--ink); border-radius: 50%; }
-      .process-step:nth-child(2) .step-mark { width: 100%; border-radius: 0; height: 1rem; background: var(--acid); }
-      .process-step:nth-child(3) .step-mark { border-radius: 0; background: repeating-linear-gradient(45deg, var(--ink) 0 3px, transparent 3px 7px); }
-      .process-step:nth-child(4) .step-mark { background: var(--ink); }
-      .booking { background: var(--acid); border-bottom: 1px solid var(--ink); }
-      .booking-head { display: grid; grid-template-columns: 1.25fr .75fr; gap: 4rem; margin-bottom: 3rem; }
-      .booking-head p { max-width: 22ch; align-self: end; font-size: 1rem; font-weight: 700; line-height: 1.15; }
-      .dates { border-top: 1px solid var(--ink); }
-      .date {
-        display: grid; grid-template-columns: .55fr .9fr .9fr .9fr auto auto; align-items: center; gap: 1rem;
-        position: relative; padding: 1.1rem 0 1.1rem 1rem; border-bottom: 1px solid var(--ink);
-        transition: background .18s ease;
-      }
-      .date::before {
-        content: ''; position: absolute; left: 0; top: 0; bottom: 1px; width: .3rem; background: var(--ink);
-        transform: scaleX(0); transform-origin: left; transition: transform .18s ease;
-      }
-      .date:hover::before, .date:focus-within::before { transform: scaleX(1); }
-      .date:hover, .date:focus-within { background: rgba(255,255,255,.45); }
-      .date-day { font-size: clamp(2.8rem, 5vw, 5.5rem); font-weight: 900; line-height: .78; letter-spacing: -.08em; }
-      .date-month, .date-time, .date-weekday { font-size: 1rem; font-weight: 800; text-transform: uppercase; }
-      .date-weekday { color: var(--muted); }
-      .seats { padding: .42rem .55rem; border: 1px solid var(--ink); font-size: .72rem; font-weight: 800; white-space: nowrap; text-transform: uppercase; }
-      .date-cta { background: var(--ink); color: var(--acid); }
-      .date-cta:hover { background: #252525; }
-      .price-tag {
-        display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1.4rem;
-        margin-top: 2.2rem; padding: 1.1rem 1.25rem; border: 1px solid var(--ink); background: var(--paper);
-      }
-      .price-tag strong { font-size: clamp(1.9rem, 3.4vw, 2.9rem); font-weight: 900; line-height: 1; letter-spacing: -.06em; }
-      .price-tag span { font-size: .85rem; font-weight: 800; text-transform: uppercase; }
-      .terms { display: grid; gap: .55rem; margin-top: 1.4rem; max-width: 62ch; font-size: .84rem; font-weight: 700; line-height: 1.3; }
-      .notice { margin-top: 1.4rem; padding: 1rem 1.15rem; border: 2px solid var(--ink); font-size: .9rem; font-weight: 800; line-height: 1.3; }
-      .place { display: grid; gap: 1.4rem; align-content: start; }
-      .map { border: 1px solid var(--ink); }
-      .map-frame { display: block; width: 100%; height: clamp(16rem, 30vw, 22rem); border: 0; }
-      .map-caption { display: block; padding: .6rem .75rem; border-top: 1px solid var(--ink); color: inherit; text-decoration: none; font-size: .74rem; font-weight: 800; text-transform: uppercase; }
-      .map-caption:hover { background: var(--acid); }
-      .route { display: grid; gap: .7rem; font-size: .92rem; font-weight: 700; line-height: 1.35; }
-      .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-      .contact h2 { max-width: 8ch; }
-      .contact-info { display: flex; flex-direction: column; justify-content: end; gap: 1.5rem; font-size: clamp(1.15rem, 2vw, 1.8rem); font-weight: 800; line-height: 1; }
-      .contact-info a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--ink); width: fit-content; }
-      .placeholder { color: var(--muted); font-size: .78rem; font-weight: 700; line-height: 1.2; }
-      footer { padding: 1rem var(--space); border-top: 1px solid var(--ink); display: flex; justify-content: space-between; font-size: .7rem; font-weight: 700; text-transform: uppercase; }
-      .booking-note { margin-top: 1.1rem; max-width: 48ch; font-size: .82rem; font-weight: 700; line-height: 1.25; }
-      .button[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
-      @media (max-width: 720px) {
-        .nav .nav-date { display: none; }
-        .hero { padding-bottom: 5rem; }
-        .hero-meta { align-items: start; flex-direction: column; }
-        .disc.one { width: 22rem; height: 22rem; right: -12rem; top: 4rem; }
-        .disc.two { width: 11rem; height: 11rem; right: 30%; top: 8rem; }
-        .bar.one { width: 35rem; right: -20rem; }
-        .intro, .booking-head, .contact { grid-template-columns: 1fr; gap: 2rem; }
-        .program { grid-template-columns: 1fr; }
-        .outcomes { grid-template-columns: 1fr; }
-        .outcome, .outcome + .outcome { padding: 1rem 0; border-right: 0; border-bottom: 1px solid var(--ink); min-height: auto; }
-        .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 14rem 11rem 11rem; }
-        .print.a { grid-row: 1 / 3; }
-        .print.c { grid-column: 1 / 3; }
-        .process { grid-template-columns: 1fr 1fr; }
-        .process-step { min-height: 10rem; padding: 1rem; border-bottom: 1px solid var(--ink); }
-        .process-step:nth-child(2) { border-right: 0; }
-        .process-step:nth-child(3) { padding-left: 0; }
-        .date { grid-template-columns: auto 1fr; gap: .3rem 1rem; padding-bottom: 1.4rem; }
-        .date-day { grid-column: 1; grid-row: 1 / 4; align-self: center; }
-        .date-month, .date-weekday, .date-time { grid-column: 2; }
-        .seats { grid-column: 1 / -1; width: fit-content; margin-top: .7rem; }
-        .date-cta { grid-column: 1 / -1; justify-content: center; }
-      }
-      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
-    </style>
+    <meta name="description" content="ISO Woodshop — столярная мастерская в Москве на улице 1905 года. Фрезеруем МДФ на станке ЧПУ, проводим мастер-классы." />
+    <title>ISO Woodshop — столярная мастерская в Москве</title>
+    <link rel="canonical" href="https://iso-woodshop.ru/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ISO Woodshop" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:title" content="ISO Woodshop — столярная мастерская в Москве" />
+    <meta property="og:description" content="Мастерская на улице 1905 года: МДФ, фрезеровка на ЧПУ, мастер-классы." />
+    <meta property="og:url" content="https://iso-woodshop.ru/" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "ISO Woodshop",
+      "description": "Столярная мастерская в Москве: фрезеровка МДФ на ЧПУ, мастер-классы.",
+      "url": "https://iso-woodshop.ru/",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "улица 1905 года, 7с1",
+        "addressLocality": "Москва",
+        "addressCountry": "RU"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 55.762709, "longitude": 37.559334 },
+      "sameAs": ["https://www.instagram.com/iso_woodshop/"]
+    }
+    </script>
   </head>
   <body>
     <nav class="nav" aria-label="Основная навигация">
-      <div class="brand">ISO Woodshop</div>
-      <div class="nav-date">Ксилография</div>
+      <a class="brand" href="/">ISO Woodshop</a>
+      <a class="nav-link" href="/master-klassy/">Мастер-классы</a>
     </nav>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
         <div class="print-marks" aria-hidden="true"><i class="disc one"></i><i class="disc two"></i><i class="bar one"></i><i class="bar two"></i></div>
         <div class="hero-copy">
-          <p class="section-label">ISO Woodshop · м. Улица 1905 года</p>
-          <h1 id="hero-title">Мастер-класс по ксилографии</h1>
+          <p class="section-label">Москва · улица 1905 года, 7с1</p>
+          <h1 id="hero-title">ISO Woodshop — столярная мастерская</h1>
           <div class="hero-meta">
-            <p>Печатаем из МДФ-панелей от ЧПУ-станка — забираете домой 5 уникальных оттисков.</p>
-            <a class="button" href="#booking">Записаться</a>
+            <p>Фрезеруем МДФ на станке ЧПУ. В той же мастерской проходят мастер-классы.</p>
+            <a class="button" href="/master-klassy/">Мастер-классы</a>
           </div>
         </div>
       </section>
 
       <section class="intro" aria-labelledby="about-title">
-        <div><p class="section-label">Практика для дизайнеров</p><h2 id="about-title">За два часа создадим тираж, который хочется повесить дома.</h2></div>
-        <p class="intro-copy">Разберём процесс от формы до печати. Никакого опыта не нужно, важны любопытство и готовность испачкать руки краской.</p>
-        <ul class="program" aria-label="Что входит в мастер-класс">
-          <li>Экскурсия по столярному производству</li>
-          <li>Два вида оттиска</li>
-          <li>Кастомизация своего оттиска</li>
-          <li>Работы забираете через 1–2 дня, когда краска полностью высохнет</li>
-        </ul>
-        <div class="outcomes" aria-label="Результат мастер-класса">
-          <div class="outcome"><strong>2</strong><span>часа в мастерской</span></div>
-          <div class="outcome"><strong>5</strong><span>ваших оттисков</span></div>
-          <div class="outcome"><strong>1</strong><span>способ повторить дома</span></div>
+        <div><p class="section-label">Чем занимаемся</p><h2 id="about-title">Производство, куда можно прийти.</h2></div>
+        <p class="intro-copy">Фрезеруем МДФ на станке ЧПУ. Из обрезков, которые остаются после работы, делаем печатные формы — на них построен наш мастер-класс по ксилографии.</p>
+        <div class="shots" aria-label="Фотографии мастерской">
+          <figure class="shot"><span>Фото мастерской 1</span></figure>
+          <figure class="shot"><span>Фото мастерской 2</span></figure>
+          <figure class="shot"><span>Фото мастерской 3</span></figure>
         </div>
-      </section>
-
-      <section class="gallery" aria-labelledby="prints-title">
-        <p class="section-label">Результат</p><h2 id="prints-title">Оттиски, которым идёт несовпадение.</h2>
-        <div class="gallery-grid" aria-label="Места для будущих фотографий оттисков">
-          <div class="print a"><span>Фото оттиска 01</span></div><div class="print b"><span>Фото оттиска 02</span></div><div class="print c"><span>Фото оттиска 03</span></div><div class="print d"><span>Фото оттиска 04</span></div>
-        </div>
-        <p class="gallery-note">Здесь появятся реальные фотографии работ и процесса печати.</p>
-      </section>
-
-      <section class="material" aria-labelledby="material-title">
-        <p class="section-label">Материал с характером</p><h2 id="material-title">Новые формы из того, что обычно остаётся после ЧПУ.</h2>
-        <div class="process" aria-label="Как создаётся оттиск">
-          <article class="process-step"><span class="step-name">Остатки<br>МДФ</span><i class="step-mark" aria-hidden="true"></i></article>
-          <article class="process-step"><span class="step-name">Фрезеровка<br>на ЧПУ</span><i class="step-mark" aria-hidden="true"></i></article>
-          <article class="process-step"><span class="step-name">Краска<br>и давление</span><i class="step-mark" aria-hidden="true"></i></article>
-          <article class="process-step"><span class="step-name">Ваш<br>оттиск</span><i class="step-mark" aria-hidden="true"></i></article>
-        </div>
-      </section>
-
-      <section class="booking" id="booking" aria-labelledby="booking-title">
-        <div class="booking-head"><div><p class="section-label">Выберите дату</p><h2 id="booking-title">Три вечера в сентябре.</h2></div><p>В группе максимум десять человек. Когда места закончатся, можно оставить контакт в листе ожидания.</p></div>
-        <div class="dates">
-          <div class="date">
-            <span class="date-day">1</span><span class="date-month">Сентября</span><span class="date-weekday">Вторник</span><span class="date-time">19:00–21:00</span><span class="seats">В группе 10 мест</span>
-            <a class="button date-cta" data-date="1 сентября, вторник, 19:00" href="#booking">Записаться</a>
-          </div>
-          <div class="date">
-            <span class="date-day">15</span><span class="date-month">Сентября</span><span class="date-weekday">Вторник</span><span class="date-time">19:00–21:00</span><span class="seats">В группе 10 мест</span>
-            <a class="button date-cta" data-date="15 сентября, вторник, 19:00" href="#booking">Записаться</a>
-          </div>
-          <div class="date">
-            <span class="date-day">30</span><span class="date-month">Сентября</span><span class="date-weekday">Среда</span><span class="date-time">19:00–21:00</span><span class="seats">В группе 10 мест</span>
-            <a class="button date-cta" data-date="30 сентября, среда, 19:00" href="#booking">Записаться</a>
-          </div>
-        </div>
-
-        <div class="price-tag"><strong>3 500 ₽</strong><span>Предоплата 100% — место закрепляется после оплаты</span></div>
-
-        <div class="terms">
-          <p><strong>Возврат.</strong> Отменили за трое суток и раньше — возвращаем всю сумму. Позже — переносим на другую дату, если в группе есть место. В день мастер-класса предоплата не возвращается: материалы уже закуплены на всю группу.</p>
-          <p id="booking-note">После оплаты пришлём подтверждение и напоминание накануне.</p>
-        </div>
-
-        <div class="notice">
-          <p>Мастер-класс 18+. С собой обязательно паспорт — без него на территорию не выпишут пропуск.</p>
-        </div>
+        <p class="shots-note">Здесь появятся фотографии производства и работ.</p>
       </section>
 
       <section class="contact" aria-labelledby="contact-title">
         <div>
-          <p class="section-label">Где мы</p><h2 id="contact-title">ISO Woodshop</h2>
-          <div class="contact-info">
-            <p>Москва, улица 1905 года, 7с1</p>
-            <a id="contact-write" href="#booking" target="_blank" rel="noopener noreferrer">Написать нам</a>
-            <a href="https://www.instagram.com/iso_woodshop/" target="_blank" rel="noopener noreferrer">@iso_woodshop</a>
-          </div>
+          <p class="section-label">Связаться</p><h2 id="contact-title">Напишите нам.</h2>
         </div>
-        <div class="place">
-          <div class="map">
-            <iframe class="map-frame" src="https://yandex.ru/map-widget/v1/?ll=37.559334%2C55.762709&amp;z=17&amp;pt=37.559334,55.762709,pm2rdm" title="Карта: Москва, улица 1905 года, 7с1" loading="lazy" allowfullscreen></iframe>
-            <a class="map-caption" href="https://yandex.com/maps/213/moscow/house/ulitsa_1905_goda_7s1/Z04YcwJoTkQCQFtvfXt3cHRiYg==/?indoorLevel=1&amp;ll=37.559334%2C55.762709&amp;z=16.53" target="_blank" rel="noopener noreferrer">Открыть в Яндекс Картах</a>
-          </div>
-          <div class="route">
-            <p><strong>От метро «Улица 1905 года»</strong> — 5 минут пешком: пройдите подземный переход до конца, дальше к торцу здания.</p>
-            <p><strong>Встречаемся на проходной №2 в 19:00.</strong> Приходите чуть заранее: пропуск выписывают на месте, по паспорту.</p>
-          </div>
+        <div class="contact-info">
+          <a href="https://www.instagram.com/iso_woodshop/" target="_blank" rel="noopener noreferrer">@iso_woodshop</a>
+          <p>Москва, улица 1905 года, 7с1</p>
         </div>
       </section>
     </main>
     <footer><span>© 2026 ISO Woodshop</span><span>Москва, улица 1905 года, 7с1</span></footer>
-
-    <script>
-      // Ник аккаунта для записи, без «@». Пока пусто — кнопки выключены.
-      const CONTACT = 'john_dow';
-
-      const ctas = document.querySelectorAll('.date-cta');
-      const contactLink = document.querySelector('#contact-write');
-      const bookingNote = document.querySelector('#booking-note');
-
-      const requestText = (date) => `Здравствуйте! Хочу записаться на мастер-класс по ксилографии — ${date}.`;
-
-      const disable = (element) => {
-        element.setAttribute('aria-disabled', 'true');
-        element.addEventListener('click', (event) => event.preventDefault());
-      };
-
-      if (CONTACT) {
-        ctas.forEach((cta) => {
-          const date = cta.dataset.date;
-          cta.href = `https://t.me/${CONTACT}?text=${encodeURIComponent(requestText(date))}`;
-          cta.target = '_blank';
-          cta.rel = 'noopener noreferrer';
-          // Текст заявки заодно уходит в буфер обмена: если чат не подставит его сам,
-          // участнику останется вставить сообщение вручную.
-          cta.addEventListener('click', () => {
-            if (navigator.clipboard) navigator.clipboard.writeText(requestText(date)).catch(() => {});
-          });
-        });
-        contactLink.href = `https://t.me/${CONTACT}`;
-      } else {
-        ctas.forEach(disable);
-        disable(contactLink);
-        bookingNote.textContent = 'Контакт для записи пока не указан — кнопки заработают, как только он появится.';
-      }
-    </script>
   </body>
 </html>
